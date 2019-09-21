@@ -9,6 +9,9 @@ const Answer = styled.div`
   height: 20vh;
   background: orange;
   margin: 100px auto;
+  text-align: center;
+  align-items: center;
+  display: flex;
 
   background: ${props =>
     props.isDraggingOver && props.number === "Fifteen" ? "green" : "orange"};

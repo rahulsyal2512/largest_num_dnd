@@ -10,6 +10,7 @@ const Container = styled.div`
   div.boxes {
     display: flex;
     justify-content: space-around;
+    flex-direction: row;
   }
 `;
 
