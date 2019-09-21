@@ -9,7 +9,6 @@ const Container = styled.div`
   min-height: 10vh;
   div.boxes {
     display: flex;
-    justify-content: space-around;
     flex-direction: row;
   }
 `;
@@ -18,7 +17,7 @@ class QuestionAnswer extends Component {
   render() {
     return (
       <Container>
-        <Droppable droppableId="question">
+        <Droppable droppableId="question" isDropDisabled={false} direction="horizontal">
           {provided => (
             <div
               className="boxes"

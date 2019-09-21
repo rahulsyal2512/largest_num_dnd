@@ -23,6 +23,9 @@ class App extends Component {
   };
   onDragEnd = result => {
     const { destination, draggableId } = result;
+    if (!destination) {
+      return;
+    }
     if (destination.droppableId === "answer" && draggableId === "Fifteen") {
       this.setState({ number: "" });
       alert("Correct Answer");
