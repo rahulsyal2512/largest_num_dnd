@@ -8,13 +8,17 @@ const Answer = styled.div`
   width: 20vh;
   height: 20vh;
   background: orange;
-  margin: 100px auto;
   text-align: center;
   align-items: center;
   display: flex;
-
   background: ${props =>
     props.isDraggingOver && props.number === "Fifteen" ? "green" : "orange"};
+  text-align: ${props => props.isDraggingOver && "center"};
+`;
+const Margin = styled.div`
+  margin: 100px auto;
+  display: flex;
+  justify-content: center;
 `;
 
 class App extends Component {
@@ -35,6 +39,7 @@ class App extends Component {
 
   onDragStart = result => {
     const { draggableId } = result;
+    console.log(result);
     this.setState({ number: draggableId });
   };
   render() {
@@ -47,19 +52,21 @@ class App extends Component {
           onDragStart={this.onDragStart}
         >
           <QuestionAnswer />
-          <Droppable droppableId="answer">
-            {(provided, snapshot) => (
-              <Answer
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                isDraggingOver={true}
-                number={number}
-              >
-                Drag Your Answer Here
-                {provided.placeholder}
-              </Answer>
-            )}
-          </Droppable>
+          <Margin>
+            <Droppable droppableId="answer">
+              {(provided, snapshot) => (
+                <Answer
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  isDraggingOver={snapshot.isDraggingOver}
+                  number={number}
+                >
+                  Drag Your Answer Here
+                  {provided.placeholder && null}
+                </Answer>
+              )}
+            </Droppable>
+          </Margin>
         </DragDropContext>
       </>
     );

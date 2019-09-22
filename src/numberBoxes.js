@@ -3,30 +3,32 @@ import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 
 const Box = styled.div`
-  width: 10vh;
-  height: 10vh;
-  background: #00bfff;
+  width: 12vh;
+  height: 12vh;
+  background: ${props => (props.isDragging ? "#00bfff6b" : "#00bfff")};
   margin-top: 20px;
   font-size: 15px;
   justify-content: center;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 30px;
   display: flex;
-  @media (min-width: 1000px) {
-    width: 15vh;
-    height: 15vh;
+  @media (max-width: 768px) {
+    width: 10vh;
+    height: 10vh;
+  margin-left: 20px;
+
   }
 `;
 const Clone = styled(Box)`
   ~ div {
-    display: none !important;
+    transform: none !important;
   }
 `;
 
 export default class NumberBoxes extends Component {
   render() {
     return (
-      <Draggable draggableId={this.props.number} index={this.props.index} disableInteractiveElementBlocking={true}>
+      <Draggable draggableId={this.props.number} index={this.props.index}>
         {(provided, snapshot) => (
           <>
             <Box
@@ -34,10 +36,11 @@ export default class NumberBoxes extends Component {
               {...provided.draggableProps}
               {...provided.dragHandleProps}
               ref={provided.innerRef}
+              isDragging={snapshot.isDragging}
             >
               {this.props.number}
             </Box>
-            {/* {snapshot.isDragging && <Clone>{this.props.number}</Clone>} */}
+            {snapshot.isDragging && <Clone>{this.props.number}</Clone>}
           </>
         )}
       </Draggable>

@@ -17,12 +17,13 @@ class QuestionAnswer extends Component {
   render() {
     return (
       <Container>
-        <Droppable droppableId="question" isDropDisabled={false} direction="horizontal">
+        <Droppable droppableId="question" direction="horizontal" >
           {provided => (
             <div
               className="boxes"
               ref={provided.innerRef}
               {...provided.droppableProps}
+              isDraggingOver={provided.isDraggingOver}
             >
               {Numbers.map((number, index) => (
                 <NumberBoxes key={index} number={number} index={index} />
